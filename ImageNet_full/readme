@@ -1,1 +1,14 @@
 truncation setup for conv layers for full imagenet
+
+learnings: though it makes logical sense to kill the backprop in trained filters, it reduces accuracy naturally by 8-10%.
+the reason the python layer didn't work was becuase you didn't normalize within the layers. The numbers within that layer and compared to other layers was just too big to let learning occur safely. AVE pool with kernel size=input feature map, learns perfecctly and it is practically the same thing.
+
+results (can be learnt in under 150k runs, BTW, here I ran for 300k, took just 1-2 days): 
+conv3: 46.6,70.4 
+conv4: 52,75.5
+conv5:52.4,76.4 
+Original however is 58,80%
+
+Questions:
+why does conv5 not show significant gain over conv4?
+will adding another conv layer help? not likely as the size is already 13x13
